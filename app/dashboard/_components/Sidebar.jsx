@@ -42,16 +42,10 @@ const Sidebar = () => {
       icon: <HiOutlineSquare3Stack3D />,
       path: "/dashboard/explore",
     },
-    {
-      id: 3,
-      name: "Upgrade",
-      icon: <HiOutlineShieldCheck />,
-      path: "/dashboard/upgrade",
-    },
     ...(isAdmin
       ? [
           {
-            id: 5,
+            id: 4,
             name: "Admin Users",
             icon: <HiOutlineShieldCheck />,
             path: "/dashboard/admin-users",
@@ -60,7 +54,7 @@ const Sidebar = () => {
       : []),
 
     {
-      id: 4,
+      id: 3,
       name: "Logout",
       icon: <CiPower />,
       path: "/dashboard/logout",

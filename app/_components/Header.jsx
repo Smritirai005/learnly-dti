@@ -31,7 +31,7 @@ const Header = () => {
       </Link>
       </div>
       <div className="flex justify-center items-center gap-10 cursor-pointer">
-       <Link href={"https://github.com/mrpankajpandey/ai-course-generator" }>
+       <Link href={"https://github.com/Smritirai005/learnly-dti" }>
          <RxGithubLogo className="text-3xl"/>
        </Link>          
       <Link href={'/dashboard'} >

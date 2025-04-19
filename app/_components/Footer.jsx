@@ -76,7 +76,7 @@ const Footer = () => {
 
         <li>
           <a
-            href="https://github.com/mrpankajpandey"
+            href="https://github.com/Smritirai005"
             rel="noreferrer"
             target="_blank"
             className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
@@ -95,7 +95,7 @@ const Footer = () => {
 
         <li>
           <a
-            href="https://linkedin.com/in/mrpankajpandey"
+            href="www.linkedin.com/in/smriti-rai-79251328b"
             rel="noreferrer"
             target="_blank"
             className="text-gray-700 text-2xl transition hover:opacity-75 dark:text-gray-200"
