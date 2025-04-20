@@ -41,7 +41,7 @@ const Header = () => {
       <div className="flex items-center gap-2">
         <Link href={'/'} className="flex justify-center items-center gap-2">
           <Image src={'/logo.png'} width={44} height={44} alt="Logo" />
-          <span className="font-bold text-xl text-black dark:text-white transition-colors duration-300">AI Course Generator</span>
+          <span className="font-bold text-xl text-black dark:text-white transition-colors duration-300">LEARNLY</span>
         </Link>
       </div>
       <div className="flex justify-center items-center gap-5 cursor-pointer">

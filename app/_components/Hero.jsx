@@ -1,46 +1,74 @@
-import { Button } from "@/components/ui/button";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import React from "react";
-import Footer from "./Footer";
-import FeatureCards from "./FeatureCards";
+import { Button } from "@/components/ui/button";
 import { HiChevronDoubleRight } from "react-icons/hi";
+import Lottie from "lottie-react";
+import FeatureCards from "./FeatureCards";
+import { motion } from "framer-motion";  // Import framer-motion
 
-const Hero = () => {
+export default function Hero() {
+  const [animationData, setAnimationData] = useState(null);
+
+  useEffect(() => {
+    fetch("/animation.json")
+      .then((res) => res.json())
+      .then((data) => setAnimationData(data))
+      .catch((err) => console.error("Failed to load animation", err));
+  }, []);
+
   return (
-    <div>
-      <section className="min-h-screen bg-white dark:bg-gray-900">
-        <div className="mx-auto max-w-screen-xl px-4 pt-32 pb-2 lg:flex lg:items-center">
-          <div className="mx-auto max-w-xl text-center">
-            <h1 className="text-3xl font-extrabold sm:text-5xl text-primary">
-              <span className="text-gray-900 dark:text-white"> AI Course </span>Generator.
-              <strong className="mt-12 font-medium text-3xl text-gray-900 dark:text-white sm:block">
-                Custom Learning paths, Powered By AI.
-              </strong>
+    <div className="bg-black text-white">
+      <section className="relative overflow-hidden">
+        <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center py-24 px-6">
+          {/* Text content with animation */}
+          <motion.div
+            className="lg:w-1/2 space-y-6"
+            initial={{ opacity: 0, y: 50 }}  // Initial state for animation
+            animate={{ opacity: 1, y: 0 }}   // Final state for animation
+            transition={{ duration: 1 }}      // Transition settings
+          >
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight
+                           bg-gradient-to-r from-purple-400 via-pink-500 to-red-400
+                           bg-clip-text text-transparent">
+              Empower Your Learning Journey with AI
             </h1>
-
-            <p className="mt-4 text-sm text-gray-700 dark:text-gray-300">
-              Unlock personalized education with AI-driven course creation.
-              Tailor your learning journey to fit your unique goals and pace.
+            <p className="max-w-md text-gray-300">
+              Discover personalized AI-generated courses tailored just for you.
             </p>
-
-            <div className="mt-20 flex flex-wrap justify-center gap-4 cursor-pointer">
-              <Link href={"/explore-course"}>
+            <div className="pt-6">
+              <Link href="/explore-course">
                 <Button variant="startButton" size="lg">
-                  Explore Now.
-                  <HiChevronDoubleRight className="text-xl ml-2" />
+                  Explore Now <HiChevronDoubleRight className="ml-2 text-xl" />
                 </Button>
               </Link>
             </div>
-          </div>
+          </motion.div>
+
+          {/* Lottie animation with animation */}
+          <motion.div
+            className="lg:w-1/2 mb-10 lg:mb-0"
+            initial={{ opacity: 0 }}   // Initial state for animation
+            animate={{ opacity: 1 }}    // Final state for animation
+            transition={{ duration: 1.5, delay: 0.3 }}  // Delay to sync with text
+          >
+            {animationData && (
+              <Lottie
+                animationData={animationData}
+                loop
+                autoplay
+                className="w-full h-auto"
+              />
+            )}
+          </motion.div>
         </div>
       </section>
 
-      {/* FeatureCards included */}
-      <section className="bg-gray-50 dark:bg-gray-900 ">
+      {/* FeatureCards Section */}
+      <section className="bg-white dark:bg-gray-900">
         <FeatureCards />
       </section>
     </div>
   );
-};
-
-export default Hero;
+}
