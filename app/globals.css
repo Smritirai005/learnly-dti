@@ -68,3 +68,9 @@
     @apply bg-background text-foreground;
   }
 }
+@layer utilities {
+  .drop-shadow-glow {
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6))
+            drop-shadow(0 0 14px rgba(135, 91, 249, 0.5));
+  }
+}

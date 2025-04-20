@@ -1,46 +1,69 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { RxGithubLogo } from "react-icons/rx";
-
-import Head from "next/head";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useState, useEffect } from "react";
 
 const Header = () => {
-  return (
-    <>
-     <Head>
-        <title>AI Course Generator - Create Personalized AI Courses</title>
-        <meta name="description" content="Generate personalized AI courses with our easy-to-use tool. Explore various topics and create your own curriculum today!" />
-        <meta name="keywords" content="AI, Course Generator, Online Learning, Educational Tool, Machine Learning, Deep Learning" />
-        <meta name="author" content="Pankaj Kumar Pandey" />
-        <link rel="canonical" href="https://https://mrpankajpandey-ai-course.vercel.app//" />
-        <meta property="og:title" content="AI Course Generator" />
-        <meta property="og:description" content="Create personalized AI courses tailored to your needs." />
-        <meta property="og:image" content="https://https://mrpankajpandey-ai-course.vercel.app//image.jpg" />
-        <meta property="og:url" content="https://https://mrpankajpandey-ai-course.vercel.app//" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="AI Course Generator" />
-        <meta name="twitter:description" content="Generate personalized AI courses with our easy-to-use tool." />
-        <meta name="twitter:image" content="https://https://mrpankajpandey-ai-course.vercel.app//image.jpg" />
-      </Head>
-    <div className="flex justify-between p-5 shadow-sm items-center">
-      <div className="flex items-center gap-2">
-      <Link  href={'/'}  className="flex justify-center items-center gap-2">
-      <Image src={'/logo.png'} width={44} height={44} /> <span className="font-bold text-xl">AI Course Generator</span>
-      </Link>
-      </div>
-      <div className="flex justify-center items-center gap-10 cursor-pointer">
-       <Link href={"https://github.com/Smritirai005/learnly-dti" }>
-         <RxGithubLogo className="text-3xl"/>
-       </Link>          
-      <Link href={'/dashboard'} >
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-      <Button variant="startButton" > Get started</Button>
-      </Link>
+  // Initialize theme based on user's preference or system setting
+  useEffect(() => {
+    // Check if user previously set a preference
+    const savedTheme = localStorage.getItem("theme");
+    
+    if (savedTheme === "dark" || 
+        (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+      document.documentElement.classList.add("dark");
+      setIsDarkMode(true);
+    } else {
+      document.documentElement.classList.remove("dark");
+      setIsDarkMode(false);
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    if (isDarkMode) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    }
+    setIsDarkMode(!isDarkMode);
+  };
+
+  return (
+    <div className="flex justify-between p-5 shadow-sm items-center bg-white dark:bg-gray-900 transition-colors duration-300">
+      <div className="flex items-center gap-2">
+        <Link href={'/'} className="flex justify-center items-center gap-2">
+          <Image src={'/logo.png'} width={44} height={44} alt="Logo" />
+          <span className="font-bold text-xl text-black dark:text-white transition-colors duration-300">AI Course Generator</span>
+        </Link>
+      </div>
+      <div className="flex justify-center items-center gap-5 cursor-pointer">
+        <button 
+          onClick={toggleDarkMode} 
+          className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          aria-label="Toggle dark mode"
+        >
+          {isDarkMode ? (
+            <MdLightMode className="text-2xl text-yellow-400" />
+          ) : (
+            <MdDarkMode className="text-2xl text-gray-700" />
+          )}
+        </button>
+        <Link href={"https://github.com/Smritirai005/learnly-dti"}>
+          <RxGithubLogo className="text-3xl text-black dark:text-white transition-colors duration-300" />
+        </Link>
+        <Link href={'/dashboard'}>
+          <Button variant="startButton">Get started</Button>
+        </Link>
       </div>
     </div>
-    </>
   );
 };
 

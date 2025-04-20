@@ -57,6 +57,12 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      backgroundImage: {
+        'gradient-animated': 'linear-gradient(270deg, #875bf9, #ee46bd, #4ade80, #3b82f6)',
+      },
+      backgroundSize: {
+        '400': '400% 400%',
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -66,12 +72,17 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "gradient-x": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "gradient-x": "gradient-x 8s ease infinite",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};
